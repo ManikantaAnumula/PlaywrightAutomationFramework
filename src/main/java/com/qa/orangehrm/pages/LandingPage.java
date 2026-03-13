@@ -5,27 +5,24 @@ import com.microsoft.playwright.Page;
 public class LandingPage {
 
 	Page page;
-	
-	//String Selectors
+
+	// String Selectors
 	public String sidePanel = "aside.oxd-sidepanel";
-	
-	//Constructor
+
+	// Constructor
 	public LandingPage(Page page) {
 		this.page = page;
 	}
-	
-	//Actions
+
+	// Actions
 	public boolean sidePanelOpenOnLogin() {
-		if(page.isVisible(sidePanel)) {
-			if(page.getAttribute(sidePanel, "class").contains("toggled")) {
-				System.out.println("Side Panel of OrangeHRM is toggled off by default on Login");
-				return false;
-			}else {
-				return false;
-			}
+		if (page.isVisible(sidePanel)) {
+			if (page.getAttribute(sidePanel, "class").equals("oxd-sidepanel")) 
+				System.out.println("Side Panel of OrangeHRM is open by default on Login");
+				return true;
 		}
-		System.out.println("Side Panel of OrangeHRM is open by default on Login");
+		System.out.println("Side Panel of OrangeHRM is toggled off by default on Login");
 		return false;
 	}
-	
+
 }

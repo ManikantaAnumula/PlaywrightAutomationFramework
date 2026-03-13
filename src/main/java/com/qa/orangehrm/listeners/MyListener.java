@@ -86,17 +86,28 @@ public class MyListener implements ITestListener {
 		test.get().getModel().setStartTime(getTime(result.getStartMillis()));
 	}
 
+	/*
+	 * public synchronized void onTestSuccess(ITestResult result) {
+	 * System.out.println((result.getMethod().getMethodName() + " passed!"));
+	 * 
+	 * Object instance = result.getInstance(); if (instance instanceof PageProvider)
+	 * { Page page = ((PageProvider) instance).getPage();
+	 * test.get().pass(result.getThrowable(), MediaEntityBuilder
+	 * .createScreenCaptureFromBase64String(takeScreenshot(page),
+	 * result.getMethod().getMethodName()) .build());
+	 * test.get().getModel().setEndTime(getTime(result.getEndMillis())); } }
+	 */
+	@Override
 	public synchronized void onTestSuccess(ITestResult result) {
-		System.out.println((result.getMethod().getMethodName() + " passed!"));
-
-		Object instance = result.getInstance();
-		if (instance instanceof PageProvider) {
-			Page page = ((PageProvider) instance).getPage();
-			test.get().pass(result.getThrowable(), MediaEntityBuilder
-					.createScreenCaptureFromBase64String(takeScreenshot(page), result.getMethod().getMethodName())
-					.build());
-			test.get().getModel().setEndTime(getTime(result.getEndMillis()));
-		}
+	    System.out.println(result.getMethod().getMethodName() + " passed!");
+	    Object instance = result.getInstance();
+	    if (instance instanceof PageProvider) {
+	        Page page = ((PageProvider) instance).getPage();
+	        test.get().pass("Test passed: " + result.getMethod().getMethodName(),
+	            MediaEntityBuilder.createScreenCaptureFromBase64String(takeScreenshot(page), result.getMethod().getMethodName())
+	            .build());
+	        test.get().getModel().setEndTime(getTime(result.getEndMillis()));
+	    }
 	}
 
 	public synchronized void onTestFailure(ITestResult result) {

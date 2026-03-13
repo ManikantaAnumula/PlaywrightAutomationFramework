@@ -11,7 +11,7 @@ import com.qa.orangehrm.constants.AppConstants;
 public class LoginPageTests extends BaseTest {
 	
 	@Test(priority = 1)
-	public void verifyTitle() {
+	public void verifyTitle() throws InterruptedException {
 		assertEquals(lp.getAppTitle(), AppConstants.LOGIN_PAGE_TITLE);
 	}
 	

@@ -22,7 +22,7 @@ public class LoginPage {
 
 	// Actions
 
-	public String getAppTitle() {
+	public String getAppTitle() throws InterruptedException {
 		System.out.println("Title of Page found: " + page.title());
 		return page.title();
 	}
